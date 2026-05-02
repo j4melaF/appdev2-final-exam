@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
     StyleSheet,
@@ -7,6 +8,7 @@ import {
     TouchableOpacity,
     TextInput,
     Alert,
+    ScrollView,
 } from "react-native";
 import Ionicons from "@react-native-vector-icons/ionicons";
 
@@ -15,10 +17,11 @@ import { api } from "../convex/_generated/api";
 import { Id } from "../convex/_generated/dataModel";
 
 interface LoginProps {
-    onLogin: (id: Id<"users">) => void
+    onLogin: (id: Id<"users">) => void;
+    navigation: any;
 }
 
-const LoginScreen = ({ onLogin } : LoginProps) => {
+const LoginScreen = ({ onLogin, navigation } : LoginProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -64,57 +67,59 @@ const LoginScreen = ({ onLogin } : LoginProps) => {
 
             {/* 2. Form Section */}
             <View style={styles.formContainer}>
-                <Text style={styles.label}>Email Address</Text>
-                <TextInput 
-                    style={styles.input} 
-                    placeholder="john@gmail.com" 
-                    value={email}
-                    onChangeText={setEmail}
-                />
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Text style={styles.label}>Email Address</Text>
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder="john@gmail.com" 
+                        value={email}
+                        onChangeText={setEmail}
+                    />
 
 
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                    style={styles.input}
-                    secureTextEntry
-                    placeholder="********"
-                    value={password}
-                    onChangeText={setPassword}
-                />
+                    <Text style={styles.label}>Password</Text>
+                    <TextInput
+                        style={styles.input}
+                        secureTextEntry
+                        placeholder="********"
+                        value={password}
+                        onChangeText={setPassword}
+                    />
 
 
-                <TouchableOpacity>
-                    <Text style={styles.forgotText}>Forgot Password?</Text>
-                </TouchableOpacity>
-
-
-                <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                    <Text style={styles.loginButtonText}>Login</Text>
-                </TouchableOpacity>
-
-
-                <Text style={styles.orText}>Or</Text>
-
-
-                <View style={styles.socialRow}>
-                    <TouchableOpacity style={styles.socialIcon}>
-                        <Ionicons name="logo-google" size={30} color="#DB4437" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.socialIcon}>
-                        <Ionicons name="logo-apple" size={30} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.socialIcon}>
-                        <Ionicons name="logo-facebook" size={30} color="#4267B2" />
-                    </TouchableOpacity>
-                </View>
-
-
-                <View style={styles.footer}>
-                    <Text>Don't have an account? </Text>
                     <TouchableOpacity>
-                        <Text style={styles.linkText}>Sign Up</Text>
+                        <Text style={styles.forgotText}>Forgot Password?</Text>
                     </TouchableOpacity>
-                </View>
+
+
+                    <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+                        <Text style={styles.loginButtonText}>Login</Text>
+                    </TouchableOpacity>
+
+
+                    <Text style={styles.orText}>Or</Text>
+
+
+                    <View style={styles.socialRow}>
+                        <TouchableOpacity style={styles.socialIcon}>
+                            <Ionicons name="logo-google" size={30} color="#DB4437" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.socialIcon}>
+                            <Ionicons name="logo-apple" size={30} color="black" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.socialIcon}>
+                            <Ionicons name="logo-facebook" size={30} color="#4267B2" />
+                        </TouchableOpacity>
+                    </View>
+
+
+                    <View style={styles.footer}>
+                        <Text>Don't have an account? </Text>
+                        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+                            <Text style={styles.linkText}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View>
         </View>
     );
@@ -148,7 +153,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         borderTopLeftRadius: 60,
         borderTopRightRadius: 60,
-        padding: 30,
+        paddingHorizontal: 30,
+        paddingTop: 30,
     },
     label: {
         fontSize: 14,

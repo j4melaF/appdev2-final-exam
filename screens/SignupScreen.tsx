@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import Ionicons from "@react-native-vector-icons/ionicons";
 
-const SignupScreen: React.FC = () => {
-  const imageSource: ImageSourcePropType = require("./../../assets/signup.webp");
+const SignupScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const imageSource: ImageSourcePropType = require("./../assets/signup.webp");
 
   return (
     <View style={styles.container}>
@@ -50,7 +50,7 @@ const SignupScreen: React.FC = () => {
 
         <View style={styles.footer}>
           <Text>Already have an account?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={styles.linkText}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 2,
+    flex: 4,
     backgroundColor: "#FFF",
     borderTopLeftRadius: 60,
     borderTopRightRadius: 60,

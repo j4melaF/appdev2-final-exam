@@ -11,7 +11,7 @@ import {
 import Ionicons from "@react-native-vector-icons/ionicons";
 
 const SignupScreen: React.FC = () => {
-  const imageSource: ImageSourcePropType = require("./../../assets/ignup.webp");
+  const imageSource: ImageSourcePropType = require("./../../assets/signup.webp");
 
   return (
     <View style={styles.container}>
